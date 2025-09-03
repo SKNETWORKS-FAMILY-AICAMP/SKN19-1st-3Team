@@ -11,11 +11,10 @@ CSV_FILE6 = "hyundai_faq.csv"  # category, question, answer, site(선택)
 
 # MySQL 연결 설정
 db_config = {
-    'user': 'Park',    # MySQL 사용자 이름
-    'password': 'Park',    # MySQL 비밀번호
+    'user': 'Park',             # MySQL 사용자 이름
+    'password': 'Park',         # MySQL 비밀번호
     'host': 'localhost',        # MySQL 호스트 (로컬호스트
-    'database': 'used_car_db',      # 사용할 데이터베이스 이름
-    'auth_plugin': 'mysql_native_password'  # 인증 플러그인 설정
+    'database': 'used_car_db'   # 사용할 데이터베이스 이름
 }
 
 
@@ -30,8 +29,8 @@ def insert_data_to_db():
         reader = csv.DictReader(file)
         for row in reader:
             cursor.execute(
-                "INSERT IGNORE INTO CarName (car_brand, car_name, car_type, newcar_price) VALUES (%s, %s, %s, %s)",
-                (row['브랜드'], row['차종'], row['차량종류'], int(row['신차가격']))
+                "INSERT INTO CarName (car_brand, car_name, car_type, newcar_price) VALUES (%s, %s, %s, %s)",
+                (row['브랜드'], row['차종'], row['차량종류'], row['신차가격'])
             )
     print("car_name.csv data inserted successfully.")
 
@@ -42,7 +41,7 @@ def insert_data_to_db():
         reader = csv.DictReader(file)
         for row in reader:
             cursor.execute(
-                "INSERT IGNORE INTO CarInfo (car_name, full_name, model_year, mileage, price) VALUES (%s, %s, %s, %s, %s)",
+                "INSERT INTO CarInfo (car_name, full_name, model_year, mileage, price) VALUES (%s, %s, %s, %s, %s)",
                 (row['차종'], row['차량명'], row['연식'], row['주행거리'], row['가격'])
             )
     print("kcar_cars.csv data inserted successfully.")
@@ -52,7 +51,7 @@ def insert_data_to_db():
         reader = csv.DictReader(file)
         for row in reader:
             cursor.execute(
-                "INSERT IGNORE INTO UsedCarData (yearNum, total_transactions) VALUES (%s, %s)",
+                "INSERT INTO UsedCarData (yearNum, total_transactions) VALUES (%s, %s)",
                 (row['연도'], row['총거래대수'])
             )
     print("usedcar_data.csv data inserted successfully.")
@@ -62,7 +61,7 @@ def insert_data_to_db():
         reader = csv.DictReader(file)
         for row in reader:
             cursor.execute(
-                "INSERT IGNORE INTO AllCarData (yearNum, total_transactions) VALUES (%s, %s)",
+                "INSERT INTO AllCarData (yearNum, total_transactions) VALUES (%s, %s)",
                 (row['연도'], row['총거래대수'])
             )
     print("AllCarData.csv data inserted successfully.")
@@ -81,6 +80,44 @@ def load_data_to_db(query):
     conn.close()
     return df
 
+
+def calculate_value_score(df: pd.DataFrame,
+    w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.1) -> pd.DataFrame:
+    """
+    CarName + CarInfo JOIN 결과 DataFrame에서 가성비 점수를 계산하고 반환합니다.
+    
+    df 컬럼:
+    - 'car_name', 'full_name', 'price', 'model_year', 'mileage', 'newcar_price'
+    
+    반환:
+    - 기존 컬럼 + 'model_count', 'price_saving', 'year_score', 'mileage_score', 'count_score', 'value_score'
+    """
+    
+    df = df.copy()
+    
+    # 동일 모델 등록 대수
+    df['model_count'] = df.groupby('car_name')['car_name'].transform('count')
+    
+    # 정규화 점수 계산
+    df['price_saving'] = (df['newcar_price'] - df['price']) / df['newcar_price']
+    df['year_score'] = (df['model_year'] - df['model_year'].min()) / (df['model_year'].max() - df['model_year'].min())
+    df['mileage_score'] = 1 - (df['mileage'] - df['mileage'].min()) / (df['mileage'].max() - df['mileage'].min())
+    df['count_score'] = (df['model_count'] - df['model_count'].min()) / (df['model_count'].max() - df['model_count'].min())
+    
+    # 종합 가성비 점수
+    df['value_score'] = ((
+        w_price * df['price_saving'] +
+        w_year * df['year_score'] +
+        w_mileage * df['mileage_score'] +
+        w_count * df['count_score']
+    )*100)
+    
+    # 점수 내림차순 정렬
+    df = df.sort_values(by='value_score', ascending=False).reset_index(drop=True)
+    
+    return df
+
+### 실행 안되면 encoding 방식 'cp949'로 바꿔보기 ###
 def insert_faq_data_to_db():
     # MySQL 데이터베이스 연결
     conn = mysql.connector.connect(**db_config)
@@ -90,14 +127,14 @@ def insert_faq_data_to_db():
         reader = csv.DictReader(file)
         for row in reader:
             cursor.execute(
-                "INSERT IGNORE INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
+                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
                 (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
             )
     with open(CSV_FILE6, mode='r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
             cursor.execute(
-                "INSERT IGNORE INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
+                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
                 (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
             )
     print("FAQ data inserted successfully.")
@@ -106,44 +143,6 @@ def insert_faq_data_to_db():
     cursor.close()
     conn.close()
 
-def calculate_value_score(df):
-    """차량의 가성비 점수를 계산하는 함수"""
-    df_copy = df.copy()
-    
-    # 필요한 컬럼이 있는지 확인
-    required_columns = ['신차가격', '가격', '연식', '주행거리', '차종']
-    if not all(col in df_copy.columns for col in required_columns):
-        return df_copy
-    
-    # 현재 연도 (2024년 기준)
-    current_year = 2024
-    
-    # 1. 신차 대비 중고차 가격 비율 (낮을수록 좋음, 0-1)
-    df_copy['price_ratio'] = df_copy['가격'] / df_copy['신차가격']
-    
-    # 2. 차량 연령 점수 (최근 연식일수록 좋음, 0-1)
-    max_age = current_year - df_copy['연식'].min()
-    df_copy['age_score'] = 1 - ((current_year - df_copy['연식']) / max_age)
-    
-    # 3. 주행거리 점수 (적을수록 좋음, 0-1)
-    max_mileage = df_copy['주행거리'].max()
-    df_copy['mileage_score'] = 1 - (df_copy['주행거리'] / max_mileage)
-    
-    # 4. 차종별 인기도 점수 (같은 차종 등록 대수가 많을수록 좋음, 0-1)
-    car_popularity = df_copy['차종'].value_counts()
-    max_popularity = car_popularity.max()
-    df_copy['popularity_score'] = df_copy['차종'].map(car_popularity) / max_popularity
-    
-    # 전체 가성비 점수 계산 (가중평균)
-    df_copy['value_score'] = (
-        (1 - df_copy['price_ratio']) * 0.35 +  # 가격 비율 (35%)
-        df_copy['age_score'] * 0.25 +          # 연식 점수 (25%)
-        df_copy['mileage_score'] * 0.25 +      # 주행거리 점수 (25%)
-        df_copy['popularity_score'] * 0.15     # 인기도 점수 (15%)
-    ) * 100  # 100점 만점으로 변환
-    
-    return df_copy
-    
+
 if __name__ == "__main__":
-    insert_data_to_db()
     insert_faq_data_to_db()

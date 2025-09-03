@@ -7,9 +7,9 @@ USE used_car_db;
 CREATE TABLE IF NOT EXISTS CarName (
     car_name VARCHAR(50) PRIMARY KEY,
     car_brand VARCHAR(50) NOT NULL,
-    car_type ENUM('경차', '승용차', 'SUV', '승합차', '트럭'),
+    car_type ENUM('경차', '승용차', 'SUV', '승합차', '트럭')
     newcar_price INT NOT NULL
-);
+)
 
 CREATE TABLE IF NOT EXISTS CarInfo (
     car_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS CarInfo (
     model_year INT,
     price INT NOT NULL,
     FOREIGN KEY (car_name) REFERENCES CarName(car_name)
-);
+)
 
 CREATE TABLE IF NOT EXISTS car_faq (
     faq_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,25 +27,25 @@ CREATE TABLE IF NOT EXISTS car_faq (
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
     site VARCHAR(100)
-);
+)
 
 CREATE TABLE IF NOT EXISTS UsedCarData (
     yearNum INT PRIMARY KEY,
     total_transactions INT NOT NULL
-);
+)
 
 CREATE TABLE IF NOT EXISTS AllCarData (
     yearNum INT PRIMARY KEY,
     total_transactions INT NOT NULL
-);
+)
 
 
 
 -- 데이터 삽입
 
-INSERT INTO CarName (car_name, car_brand, car_type, newcar_price) VALUES (%s, %s, %s, %s);
-INSERT INTO CarInfo (car_name, full_name, mileage, model_year, price) VALUES (%s, %s, %s, %s, %s);
-INSERT INTO UsedCarData (yearNum, total_transactions) VALUES (%s, %s);
+INSERT INTO CarName (car_name, car_brand, car_type, newcar_price) VALUES (%s, %s, %s, %s)
+INSERT INTO CarInfo (car_name, full_name, mileage, model_year, price) VALUES (%s, %s, %s, %s, %s)
+INSERT INTO UsedCarData (yearNum, total_transactions) VALUES (%s, %s)
 
 
 -- 데이터 조회
@@ -149,3 +149,7 @@ SELECT
 FROM CarInfo i
 GROUP BY price_range
 ORDER BY total_used_cars DESC;
+
+SELECT *
+FROM CarName c
+JOIN CarInfo i ON c.car_name = i.car_name;
