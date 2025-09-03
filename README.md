@@ -39,7 +39,7 @@
       </a>
     </td>
     <td align="center" width="200">
-      <img src="https://ibb.co/HfV7p3b8" width="150" height="150" style="border-radius: 50%;" alt="김지훈"/>
+      <img src="https://i.ibb.co/M5m6M0Y/streamlit.png" width="150" height="150" style="border-radius: 50%;" alt="김지훈"/>
       <br />
       <h3>김지훈</h3>
       <p>역할: </p>
