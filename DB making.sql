@@ -149,3 +149,7 @@ SELECT
 FROM CarInfo i
 GROUP BY price_range
 ORDER BY total_used_cars DESC;
+
+SELECT *
+FROM CarName c
+JOIN CarInfo i ON c.car_name = i.car_name;

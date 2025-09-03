@@ -78,5 +78,43 @@ def load_data_to_db(query):
     conn.close()
     return df
 
+
+def calculate_value_score(df: pd.DataFrame,
+                          w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.1) -> pd.DataFrame:
+    """
+    CarName + CarInfo JOIN 결과 DataFrame에서 가성비 점수를 계산하고 반환합니다.
+    
+    df 컬럼:
+    - 'car_name', 'full_name', 'price', 'model_year', 'mileage', 'newcar_price'
+    
+    반환:
+    - 기존 컬럼 + 'model_count', 'price_saving', 'year_score', 'mileage_score', 'count_score', 'value_score'
+    """
+    
+    df = df.copy()
+    
+    # 동일 모델 등록 대수
+    df['model_count'] = df.groupby('car_name')['car_name'].transform('count')
+    
+    # 정규화 점수 계산
+    df['price_saving'] = (df['newcar_price'] - df['price']) / df['newcar_price']
+    df['year_score'] = (df['model_year'] - df['model_year'].min()) / (df['model_year'].max() - df['model_year'].min())
+    df['mileage_score'] = 1 - (df['mileage'] - df['mileage'].min()) / (df['mileage'].max() - df['mileage'].min())
+    df['count_score'] = (df['model_count'] - df['model_count'].min()) / (df['model_count'].max() - df['model_count'].min())
+    
+    # 종합 가성비 점수
+    df['value_score'] = ((
+        w_price * df['price_saving'] +
+        w_year * df['year_score'] +
+        w_mileage * df['mileage_score'] +
+        w_count * df['count_score']
+    )*100)
+    
+    # 점수 내림차순 정렬
+    df = df.sort_values(by='value_score', ascending=False).reset_index(drop=True)
+    
+    return df
+
+
 if __name__ == "__main__":
     insert_data_to_db()
