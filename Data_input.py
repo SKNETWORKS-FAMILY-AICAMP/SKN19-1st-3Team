@@ -6,13 +6,15 @@ CSV_FILE = "merged_clean.csv"  # 차종, 차량명, 연식, 주행거리, 가격
 CSV_FILE2 = "car_name.csv"  # 브랜드, 차종, 차량종류, 신차가격
 CSV_FILE3 = "usedcar_data.csv" # 연도, 총거래대수
 CSV_FILE4 = "AllCarData.csv" # 연도, 총거래량
+CSV_FILE5 = "kia_faq.csv"  # category, question, answer, site(선택)
+CSV_FILE6 = "hyundai_faq.csv"  # category, question, answer, site(선택)
 
 # MySQL 연결 설정
 db_config = {
-    'user': 'Park',    # MySQL 사용자 이름
-    'password': 'Park',    # MySQL 비밀번호
+    'user': 'Park',             # MySQL 사용자 이름
+    'password': 'Park',         # MySQL 비밀번호
     'host': 'localhost',        # MySQL 호스트 (로컬호스트
-    'database': 'used_car_db'      # 사용할 데이터베이스 이름
+    'database': 'used_car_db'   # 사용할 데이터베이스 이름
 }
 
 
@@ -80,7 +82,7 @@ def load_data_to_db(query):
 
 
 def calculate_value_score(df: pd.DataFrame,
-                          w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.1) -> pd.DataFrame:
+    w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.1) -> pd.DataFrame:
     """
     CarName + CarInfo JOIN 결과 DataFrame에서 가성비 점수를 계산하고 반환합니다.
     
@@ -115,6 +117,32 @@ def calculate_value_score(df: pd.DataFrame,
     
     return df
 
+### 실행 안되면 encoding 방식 'cp949'로 바꿔보기 ###
+def insert_faq_data_to_db():
+    # MySQL 데이터베이스 연결
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    with open(CSV_FILE5, mode='r', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            cursor.execute(
+                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
+                (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
+            )
+    with open(CSV_FILE6, mode='r', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            cursor.execute(
+                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
+                (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
+            )
+    print("FAQ data inserted successfully.")
+    
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 
 if __name__ == "__main__":
-    insert_data_to_db()
+    insert_faq_data_to_db()
