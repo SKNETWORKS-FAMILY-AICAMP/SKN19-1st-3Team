@@ -34,7 +34,10 @@ CREATE TABLE IF NOT EXISTS UsedCarData (
     total_transactions INT NOT NULL
 )
 
-
+CREATE TABLE IF NOT EXISTS AllCarData (
+    yearNum INT PRIMARY KEY,
+    total_transactions INT NOT NULL
+)
 
 
 
@@ -48,7 +51,7 @@ INSERT INTO UsedCarData (yearNum, total_transactions) VALUES (%s, %s)
 -- 데이터 조회
 
 -- 브랜드별 평균 중고차 가격
-SELECT c.car_brand,
+SELECT c.car_brand,  COUNT(*),
        AVG(i.price) AS avg_used_price
 FROM CarName c
 JOIN CarInfo i ON c.car_name = i.car_name
@@ -56,7 +59,7 @@ GROUP BY c.car_brand
 ORDER BY avg_used_price DESC;
 
 -- 차량 종류별 평균 중고차 가격
-SELECT c.car_brand,
+SELECT c.car_brand,  COUNT(*),
        AVG(i.price) AS avg_used_price
 FROM CarName c
 JOIN CarInfo i ON c.car_name = i.car_name
@@ -64,7 +67,7 @@ GROUP BY c.car_type
 ORDER BY avg_used_price DESC;
 
 -- 브랜드-차량 종류별 평균 중고차 가격
-SELECT c.car_brand,
+SELECT c.car_brand,  COUNT(*),
         AVG(i.price) AS avg_used_price
 FROM CarName c
 JOIN CarInfo i ON c.car_name = i.car_name
@@ -72,7 +75,7 @@ GROUP BY c.car_brand, c.car_type
 ORDER BY avg_used_price DESC;
 
 -- 연식별 평균 중고차 가격
-SELECT i.model_year,
+SELECT i.model_year, COUNT(*),
        AVG(i.price) AS avg_used_price
 FROM CarInfo i
 GROUP BY i.model_year
@@ -80,7 +83,7 @@ ORDER BY i.model_year DESC;
 
 -- 연식-브랜드별 평균 중고차 가격
 SELECT i.model_year,
-       c.car_brand,
+       c.car_brand,  COUNT(*),
        AVG(i.price) AS avg_used_price
 FROM CarInfo i
 JOIN CarName c ON i.car_name = c.car_name
@@ -88,7 +91,7 @@ GROUP BY i.model_year, c.car_brand
 ORDER BY i.model_year DESC, avg_used_price DESC;
 
 -- 브랜드별 평균 주행 거리
-SELECT c.car_brand,
+SELECT c.car_brand,  COUNT(*),
        AVG(i.mileage) AS avg_mileage
 FROM CarName c
 JOIN CarInfo i ON c.car_name = i.car_name
