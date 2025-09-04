@@ -1,6 +1,6 @@
-#  중고 자동차 정보 조회 시스템
+#  중고 자동차 정보 조회 서비스
 
- **데이터 기반 중고차 구매 의사결정 지원 플랫폼**  
+ **데이터 기반 중고차 구매 의사결정 지원 서비스**  
  Streamlit 기반 웹 애플리케이션으로 중고차 시장 분석과 실시간 정보 조회 서비스
 
 <br>
@@ -34,54 +34,11 @@
 </a>
 <br />
 <a href="mailto:myem21@gmail.com">
-<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
-</a>
-</div>
-</td>
-<td align="center" width="200" style="vertical-align: top; height: 300px;">
-<img src="images/jin.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김진"/>
-<br />
-<h3 style="margin: 10px 0 5px 0;">김진</h3>
-<p style="margin: 5px 0;">?</p>
-<div style="margin-top: 10px;">
-<a href="https://github.com/KIMjjjjjjjj">
-<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
-</a>
-<br />
-<a href="mailto:jin432101@gmail.com">
-<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
-</a>
-</div>
-</td>
-<td align="center" width="200" style="vertical-align: top; height: 300px;">
-<img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김지훈"/>
-<br />
-<h3 style="margin: 10px 0 5px 0;">김지훈</h3>
-<p style="margin: 5px 0;">?</p>
-<div style="margin-top: 10px;">
-<a href="https://github.com/ddeeqq">
-<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
-</a>
-<br />
-<a href="mailto:jihanki3@naver.com">
-<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
-</a>
-</div>
-</td>
-</tr>
-</table>
-
-<br>
-
----
-
-##  프로젝트 개요
-
-중고 자동차 구매를 고려하는 사용자들에게 **데이터 기반의 인사이트**와 **실시간 차량 정보**를 제공하는 종합 플랫폼입니다.
+<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColo스
 
 ###  핵심 가치
 - **데이터 기반 분석**: 브랜드별, 연식별, 차종별 심층 분석
-- **실시간 정보**: 최신 중고차 시장 데이터 제공  
+- **실시간 정보**: (K-car)최신 중고차 시장 데이터 제공  
 - **가성비 분석**: 독자적 알고리즘을 통한 가성비 지수 계산
 - **사용자 친화적**: 직관적 UI/UX를 통한 쉬운 정보 접근
 
@@ -202,6 +159,8 @@ CREATE TABLE CarName (
     newcar_price INT NOT NULL
 );
 ```
+**규모**: 67개 차종  
+**주요 컬럼**: 브랜드, 차종, 차량종류, 신차가격
 
 #### CarInfo 테이블  
 ```sql
@@ -215,6 +174,8 @@ CREATE TABLE CarInfo (
     FOREIGN KEY (car_name) REFERENCES CarName(car_name)
 );
 ```
+**규모**: 6,485개 중고차 매물  
+**주요 컬럼**: 차종, 차량명, 연식, 주행거리, 가격
 
 #### car_faq 테이블
 ```sql
@@ -226,36 +187,35 @@ CREATE TABLE car_faq (
     site VARCHAR(100)
 );
 ```
+**규모**: 218개 FAQ (현대 132개 + 기아 86개)  
+**주요 컬럼**: 카테고리, 질문, 답변, 출처사이트
 
-<br>
-
----
-
-
-### 가성비 점수 산출 공식
-
-```python
-def calculate_value_score(df, w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.1):
-    # 정규화 점수 계산
-    df['price_saving'] = (df['newcar_price'] - df['price']) / df['newcar_price']
-    df['year_score'] = (df['model_year'] - df['model_year'].min()) / (df['model_year'].max() - df['model_year'].min())
-    df['mileage_score'] = 1 - (df['mileage'] - df['mileage'].min()) / (df['mileage'].max() - df['mileage'].min())
-    df['count_score'] = (df['model_count'] - df['model_count'].min()) / (df['model_count'].max() - df['model_count'].min())
-    
-    # 종합 가성비 점수 (100점 만점)
-    df['value_score'] = (w_price * df['price_saving'] + w_year * df['year_score'] + 
-                        w_mileage * df['mileage_score'] + w_count * df['count_score']) * 100
+#### UsedCarData 테이블
+```sql
+CREATE TABLE UsedCarData (
+    yearNum INT PRIMARY KEY,
+    total_transactions INT NOT NULL
+);
 ```
+**규모**: 9년간 데이터 (2015-2023)  
+**주요 컬럼**: 연도, 중고차 총거래대수
 
-### 평가 지표
-- **가격 절약률 (40%)**: 신차 대비 중고차 가격 할인율
-- **연식 점수 (20%)**: 차량의 상대적 신식도
-- **주행거리 점수 (30%)**: 주행거리 대비 차량 상태
-- **인기도 점수 (10%)**: 동일 모델 등록 대수
+#### AllCarData 테이블
+```sql
+CREATE TABLE AllCarData (
+    yearNum INT PRIMARY KEY,
+    total_transactions INT NOT NULL
+);
+```
+**규모**: 9년간 데이터 (2015-2023)  
+**주요 컬럼**: 연도, 전체차량 총거래대수
+
 
 <br>
 
 ---
+
+
 
 ##  주요 분석 기능
 
