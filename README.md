@@ -5,14 +5,14 @@
 
 <br>
 
-##  팀 프로필
+팀 프로필
 <table>
 <tr>
 <td align="center" width="200" style="vertical-align: top; height: 300px;">
 <img src="images/yeon.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="박준영"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">박준영</h3>
-<p style="margin: 5px 0;">?</p>
+<p style="margin: 5px 0;">역할 | ?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/deneb784">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -27,14 +27,53 @@
 <img src="images/jong.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="정종현"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">정종현</h3>
-<p style="margin: 5px 0;">?</p>
+<p style="margin: 5px 0;">역할 | ?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/myem21">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 </a>
 <br />
 <a href="mailto:myem21@gmail.com">
-<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColo스
+<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
+</a>
+</div>
+</td>
+<td align="center" width="200" style="vertical-align: top; height: 300px;">
+<img src="images/jin.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김진"/>
+<br />
+<h3 style="margin: 10px 0 5px 0;">김진</h3>
+<p style="margin: 5px 0;">역할 | ?</p>
+<div style="margin-top: 10px;">
+<a href="https://github.com/KIMjjjjjjjj">
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
+</a>
+<br />
+<a href="mailto:jin432101@gmail.com">
+<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
+</a>
+</div>
+</td>
+<td align="center" width="200" style="vertical-align: top; height: 300px;">
+<img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김지훈"/>
+<br />
+<h3 style="margin: 10px 0 5px 0;">김지훈</h3>
+<p style="margin: 5px 0;">역할 | ?</p>
+<div style="margin-top: 10px;">
+<a href="https://github.com/ddeeqq">
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
+</a>
+<br />
+<a href="mailto:jihanki3@naver.com">
+<img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
+</a>
+</div>
+</td>
+</tr>
+</table>
+
+<br>
+
+---
 
 ###  핵심 가치
 - **데이터 기반 분석**: 브랜드별, 연식별, 차종별 심층 분석
