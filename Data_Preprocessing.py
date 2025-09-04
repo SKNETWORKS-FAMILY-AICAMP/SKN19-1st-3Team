@@ -1,6 +1,11 @@
 import pandas as pd
 import numpy as np
 
+"""
+불러온 차량 데이터를 병합 및 정제
+"""
+
+# 차량명을 확인하고, 기본 이름(차종)을 추가
 def merge_car_data(car_file, name_file, output_file = "merged.csv"):
 
     """
@@ -25,8 +30,7 @@ def merge_car_data(car_file, name_file, output_file = "merged.csv"):
     data1.to_csv(output_file, index=False, encoding="utf-8-sig")
     print(f"[INFO] 병합 완료 → {output_file}")
 
-
-
+# 주행거리, 연식, 가격 등을 적합한 자료형으로 정제
 def clean_merged_data(input_file="merged.csv", output_file="merged_clean.csv"):
 
     """
@@ -77,7 +81,5 @@ def clean_merged_data(input_file="merged.csv", output_file="merged_clean.csv"):
     return data
 
 if __name__ == "__main__":
-    # 1️⃣ 차량 정보 크롤링 실행
     merge_car_data("kcar_cars.csv", "car_name.csv", "merged.csv")
-    # 2️⃣ 병합된 데이터 정제 실행
     clean_merged_data("merged.csv", "merged_clean.csv")

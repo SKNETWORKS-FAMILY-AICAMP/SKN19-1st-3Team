@@ -2,17 +2,20 @@ import time
 import random
 import csv
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+"""
+KCar 중고차 사이트에서 차량 정보(차량명, 연식, 주행거리, 가격) 크롤링 -> CSV 저장
+"""
 
 CSV_FILE = "kcar_cars.csv"
-MAX_PAGES = 500  # 크롤링할 페이지 수
+MAX_PAGES = 400  # 크롤링할 페이지 수
 BASE_URL = "https://www.kcar.com/bc/search"
 
+# Selenium Chrome 드라이버 초기화
 def init_driver(headless=True):
     """Selenium Chrome 드라이버 초기화"""
     options = Options()
@@ -27,8 +30,9 @@ def init_driver(headless=True):
     driver = webdriver.Chrome(options=options)
     return driver
 
+# 현재 페이지에서 차량명, 연식, 주행거리, 가격을 추출
 def get_car_info(driver):
-    """현재 페이지에서 차량명, 연식, 주행거리, 가격을 추출"""
+
     car_data = []
     car_boxes = driver.find_elements(By.CSS_SELECTOR, "div.carListBox")
     
@@ -47,8 +51,8 @@ def get_car_info(driver):
             continue
     return car_data
 
+# 페이지에서 모델명 리스트 추출
 def get_car_models(driver):
-    """_001~_007 접두사별로 차량 모델명을 7개의 리스트로 반환"""
     models_001, models_002, models_003, models_004, models_005, models_006, models_007 = [], [], [], [], [], [], []
     labels = driver.find_elements(By.CSS_SELECTOR, "label.el-checkbox")
     
@@ -80,8 +84,9 @@ def get_car_models(driver):
     
     return models
 
+# 선택된 모델명 리스트 추출
 def get_checked_car_models(driver):
-    """_001~_007 접두사 차량 중 체크된 모델명을 리스트로 반환"""
+
     all_models = []
     labels = driver.find_elements(By.CSS_SELECTOR, "label.el-checkbox")
     
@@ -101,6 +106,7 @@ def get_checked_car_models(driver):
     
     return all_models
 
+# 차량 정보 크롤링 및 CSV 저장
 def crawl_car_info(base_url, max_pages=5, csv_file=CSV_FILE):
     """차량 정보(차량명, 연식, 주행거리, 가격)를 버튼 클릭으로 페이지를 넘기며 크롤링 후 CSV 저장"""
     driver = init_driver()
@@ -155,7 +161,7 @@ def crawl_car_info(base_url, max_pages=5, csv_file=CSV_FILE):
     driver.quit()
     print(f"\n✅ 차량 정보 크롤링 완료! 데이터가 '{csv_file}'에 저장되었습니다.")
 
-
+# 차량 모델명 크롤링
 def crawl_car_models(base_url):
     """모델명을 페이지별로 수집하여 리스트로 반환"""
     driver = init_driver()
@@ -170,6 +176,5 @@ def crawl_car_models(base_url):
     return sorted(models)
 
 if __name__ == "__main__":
-    # 1️⃣ 차량 정보 크롤링 실행
     crawl_car_info(BASE_URL, MAX_PAGES)
 

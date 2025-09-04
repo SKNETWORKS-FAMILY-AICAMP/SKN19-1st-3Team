@@ -4,30 +4,39 @@ import pandas as pd
 import mysql.connector
 from dotenv import load_dotenv
 
+
+"""
+DB 연결
+- MySQL 데이터베이스에 CSV 데이터를 삽입
+- DB에서 데이터를 조회하여 DataFrame으로 반환
+- DataFrame에서 가성비 점수 계산
+"""
+
 CSV_FILE = "data/merged_clean.csv"  # 차종, 차량명, 연식, 주행거리, 가격
-CSV_FILE2 = "data/car_name.csv"  # 브랜드, 차종, 차량종류, 신차가격
+CSV_FILE2 = "data/car_name.csv"     # 브랜드, 차종, 차량종류, 신차가격
 CSV_FILE3 = "data/usedcar_data.csv" # 연도, 총거래대수
-CSV_FILE4 = "data/AllCarData.csv" # 연도, 총거래량
-CSV_FILE5 = "data/kia_faq.csv"  # category, question, answer, site(선택)
+CSV_FILE4 = "data/AllCarData.csv"   # 연도, 총거래량
+CSV_FILE5 = "data/kia_faq.csv"      # category, question, answer, site(선택)
 CSV_FILE6 = "data/hyundai_faq.csv"  # category, question, answer, site(선택)
 
-load_dotenv()  # .env 파일에서 환경 변수 로드
-# MySQL 연결 설정
+# 데이터베이스 설정 (MYSQL)
+load_dotenv()
 db_config = {
-    'user': os.getenv("DATABASE_USER"),             # MySQL 사용자 이름
-    'password': os.getenv("DATABASE_PASSWORD"),         # MySQL 비밀번호
-    'host': os.getenv("HOST"),        # MySQL 호스트 (로컬호스트
-    'database': 'used_car_db'   # 사용할 데이터베이스 이름
+    'user': os.getenv("DATABASE_USER"),           # MySQL 사용자 이름
+    'password': os.getenv("DATABASE_PASSWORD"),   # MySQL 비밀번호
+    'host': os.getenv("HOST"),                    # MySQL 호스트
+    'database': 'used_car_db'                     # 사용할 데이터베이스 이름
 }
 
-
+# 차량 데이터 삽입
 ### 실행 안되면 encoding 방식 'cp949'로 바꿔보기 ###
 def insert_data_to_db():
-    # MySQL 데이터베이스 연결
+
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
     
     # car_name.csv 파일 읽기 및 데이터 삽입
+    print("car_name.csv data inserting...")
     with open(CSV_FILE2, mode='r', encoding='cp949') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -35,11 +44,10 @@ def insert_data_to_db():
                 "INSERT INTO CarName (car_brand, car_name, car_type, newcar_price) VALUES (%s, %s, %s, %s)",
                 (row['브랜드'], row['차종'], row['차량종류'], row['신차가격'])
             )
-    print("car_name.csv data inserted successfully.")
 
 
-
-    # kcar_cars.csv 파일 읽기 및 데이터 삽입
+    # merge_clean.csv 파일 읽기 및 데이터 삽입
+    print("merge_clean.csv data inserting...")
     with open(CSV_FILE, mode='r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -47,9 +55,10 @@ def insert_data_to_db():
                 "INSERT INTO CarInfo (car_name, full_name, model_year, mileage, price) VALUES (%s, %s, %s, %s, %s)",
                 (row['차종'], row['차량명'], row['연식'], row['주행거리'], row['가격'])
             )
-    print("kcar_cars.csv data inserted successfully.")
+    
 
     # usedcar_data.csv 파일 읽기 및 데이터 삽입
+    print("usedcar_data.csv data inserting...")
     with open(CSV_FILE3, mode='r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -57,9 +66,10 @@ def insert_data_to_db():
                 "INSERT INTO UsedCarData (yearNum, total_transactions) VALUES (%s, %s)",
                 (row['연도'], row['총거래대수'])
             )
-    print("usedcar_data.csv data inserted successfully.")
+
 
     # AllCarData.csv 파일 읽기 및 데이터 삽입
+    print("AllCarData.csv data inserting...")
     with open(CSV_FILE4, mode='r', encoding='cp949') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -67,13 +77,52 @@ def insert_data_to_db():
                 "INSERT INTO AllCarData (yearNum, total_transactions) VALUES (%s, %s)",
                 (row['연도'], row['총거래대수'])
             )
-    print("AllCarData.csv data inserted successfully.")
 
     conn.commit()
     cursor.close()
     conn.close()
+    print("All data inserted successfully.")
 
+# FAQ 데이터 삽입
+### 실행 안되면 encoding 방식 'cp949'로 바꿔보기 ###
+def insert_faq_data_to_db():
 
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    # kia_faq.csv 파일 읽기 및 데이터 삽입
+    print("KIA FAQ data inserting...")
+    with open(CSV_FILE5, mode='r', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            cursor.execute(
+                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
+                (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
+            )
+
+    # hyundai_faq.csv 파일 읽기 및 데이터 삽입
+    print("Hyundai FAQ data inserting...")
+    with open(CSV_FILE6, mode='r', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            category = row['category'].strip()
+            question = row['question'].strip()
+
+            # question이 category로 시작하면 제거
+            if question.startswith(category):
+                question = question[len(category):].strip()
+
+            cursor.execute(
+                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
+                (category, question, row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
+            )
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print("FAQ data inserted successfully.")
+
+# DB에서 데이터 조회하여 DataFrame으로 반환
 def load_data_to_db(query):
     # MySQL 데이터베이스 연결
     conn = mysql.connector.connect(**db_config)
@@ -83,7 +132,7 @@ def load_data_to_db(query):
     conn.close()
     return df
 
-
+# 가성비 점수 계산
 def calculate_value_score(df: pd.DataFrame,
     w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.1) -> pd.DataFrame:
     """
@@ -120,39 +169,7 @@ def calculate_value_score(df: pd.DataFrame,
     
     return df
 
-### 실행 안되면 encoding 방식 'cp949'로 바꿔보기 ###
-def insert_faq_data_to_db():
-    # MySQL 데이터베이스 연결
-    conn = mysql.connector.connect(**db_config)
-    cursor = conn.cursor()
-
-    with open(CSV_FILE5, mode='r', encoding='utf-8-sig') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            cursor.execute(
-                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
-                (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
-            )
-    with open(CSV_FILE6, mode='r', encoding='utf-8-sig') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            category = row['category'].strip()
-            question = row['question'].strip()
-
-            # question이 category로 시작하면 제거
-            if question.startswith(category):
-                question = question[len(category):].strip()
-
-            cursor.execute(
-                "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
-                (category, question, row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
-            )
-    print("FAQ data inserted successfully.")
-    
-    conn.commit()
-    cursor.close()
-    conn.close()
-
 
 if __name__ == "__main__":
     insert_data_to_db()
+    insert_faq_data_to_db()
