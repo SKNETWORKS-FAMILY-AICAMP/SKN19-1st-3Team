@@ -87,7 +87,7 @@
 
 ## 시스템 아키텍처
 
-### ERD (Entity Relationship Diagram)
+### ERD
 <div align="center">
   <img src="images/erd.png" alt="Database ERD" width="800"/>
   <br>
