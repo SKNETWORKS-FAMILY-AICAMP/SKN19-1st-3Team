@@ -5,57 +5,68 @@
 ## 팀 프로필
 <table>
 <tr>
-<td align="center" width="200">
-<img src="images/yeon.jpg" width="150" height="150" style="border-radius: 50%;" alt="박준영"/>
+<td align="center" width="200" style="vertical-align: top; height: 300px;">
+<img src="images/yeon.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="박준영"/>
 <br />
-<h3>박준영</h3>
-<p>역할: </p>
+<h3 style="margin: 10px 0 5px 0;">박준영</h3>
+<p style="margin: 5px 0;">역할: </p>
+<div style="margin-top: 10px;">
 <a href="https://github.com/deneb784">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 </a>
+<br />
 <a href="mailto:deneb784@gmail.com">
 <img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
 </a>
+</div>
 </td>
-<td align="center" width="200">
-<img src="images/jong.png" width="150" height="150" style="border-radius: 50%;" alt="정종현"/>
+<td align="center" width="200" style="vertical-align: top; height: 300px;">
+<img src="images/jong.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="정종현"/>
 <br />
-<h3>정종현</h3>
-<p>역할: </p>
+<h3 style="margin: 10px 0 5px 0;">정종현</h3>
+<p style="margin: 5px 0;">역할: </p>
+<div style="margin-top: 10px;">
 <a href="https://github.com/myem21">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 </a>
+<br />
 <a href="mailto:myem21@gmail.com">
 <img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
 </a>
+</div>
 </td>
-<td align="center" width="200">
-<img src="images/jin.png" width="150" height="150" style="border-radius: 50%;" alt="김진"/>
+<td align="center" width="200" style="vertical-align: top; height: 300px;">
+<img src="images/jin.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김진"/>
 <br />
-<h3>김진</h3>
-<p>역할: </p>
+<h3 style="margin: 10px 0 5px 0;">김진</h3>
+<p style="margin: 5px 0;">역할: </p>
+<div style="margin-top: 10px;">
 <a href="https://github.com/KIMjjjjjjjj">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 </a>
+<br />
 <a href="mailto:jin432101@gmail.com">
 <img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
 </a>
+</div>
 </td>
-<td align="center" width="200">
-<img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%;" alt="김지훈"/>
+<td align="center" width="200" style="vertical-align: top; height: 300px;">
+<img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김지훈"/>
 <br />
-<h3>김지훈</h3>
-<p>역할: </p>
+<h3 style="margin: 10px 0 5px 0;">김지훈</h3>
+<p style="margin: 5px 0;">역할: </p>
+<div style="margin-top: 10px;">
 <a href="https://github.com/ddeeqq">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
 </a>
+<br />
 <a href="mailto:jihanki3@naver.com">
 <img src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=Gmail&logoColor=white"/>
 </a>
+</div>
 </td>
 </tr>
 </table>
-
 <br>
 
 ## 프로젝트 개요
