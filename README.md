@@ -85,10 +85,26 @@
 
 ---
 
-##  시스템 아키텍처
+시스템 아키텍처
+ERD (Entity Relationship Diagram)
+<div align="center">
+  <img src="images/erd.png" alt="Database ERD" width="800"/>
+  <br>
+  <i> 데이터베이스 테이블 간의 관계도</i>
+</div>
 
-### ERD (Entity Relationship Diagram)
-src="images/yeon.jpg"
+테이블 관계
+
+CarName → Car_Info: 1:N 관계 (차량 기본정보 - 중고차 매물정보)
+car_faq: FAQ 정보 독립 테이블 (현대/기아 통합)
+AllCarData: 전체 차량 등록 통계 데이터
+UsedCarData: 중고차 거래량 통계 데이터
+
+핵심 기능
+
+가성비 분석: CarName + Car_Info 조인으로 신차 vs 중고차 가격 비교
+시장 트렌드: AllCarData + UsedCarData로 거래량 추이 분석
+FAQ 서비스: car_faq 테이블 기반 카테고리별 질답 제공
 
 <br>
 
