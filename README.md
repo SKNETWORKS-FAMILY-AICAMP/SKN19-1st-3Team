@@ -12,7 +12,7 @@
 <img src="images/yeon.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="박준영"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">박준영</h3>
-<p style="margin: 5px 0;">팀장 | 백엔드 개발</p>
+<p style="margin: 5px 0;">?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/deneb784">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -27,7 +27,7 @@
 <img src="images/jong.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="정종현"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">정종현</h3>
-<p style="margin: 5px 0;">데이터 분석 | 시각화</p>
+<p style="margin: 5px 0;">?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/myem21">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -42,7 +42,7 @@
 <img src="images/jin.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김진"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">김진</h3>
-<p style="margin: 5px 0;">프론트엔드 | UI/UX</p>
+<p style="margin: 5px 0;">?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/KIMjjjjjjjj">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -57,7 +57,7 @@
 <img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김지훈"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">김지훈</h3>
-<p style="margin: 5px 0;">크롤링 | 데이터 수집</p>
+<p style="margin: 5px 0;">?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/ddeeqq">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
