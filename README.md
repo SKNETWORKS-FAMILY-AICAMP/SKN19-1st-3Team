@@ -90,7 +90,6 @@ ERD (Entity Relationship Diagram)
 <div align="center">
   <img src="images/erd.png" alt="Database ERD" width="800"/>
   <br>
-  <i> 데이터베이스 테이블 간의 관계도</i>
 </div>
 
 테이블 관계
