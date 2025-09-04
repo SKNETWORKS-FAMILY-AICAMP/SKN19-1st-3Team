@@ -88,7 +88,7 @@
 ##  시스템 아키텍처
 
 ### ERD (Entity Relationship Diagram)
-<!-- ERD 이미지 자리 -->
+src="images/yeon.jpg"
 
 <br>
 
