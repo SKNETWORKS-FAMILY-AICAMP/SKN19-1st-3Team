@@ -11,7 +11,7 @@
 <img src="images/yeon.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="박준영"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">박준영</h3>
-<p style="margin: 5px 0;">역할 | ?</p>
+<p style="margin: 5px 0;">역할 | DB 구축 </p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/deneb784">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -26,7 +26,7 @@
 <img src="images/jong.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="정종현"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">정종현</h3>
-<p style="margin: 5px 0;">역할 | ?</p>
+<p style="margin: 5px 0;">역할 | PM </p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/myem21">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -41,7 +41,7 @@
 <img src="images/jin.png" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김진"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">김진</h3>
-<p style="margin: 5px 0;">역할 | ?</p>
+<p style="margin: 5px 0;">역할 | 크롤링 </p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/KIMjjjjjjjj">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -56,7 +56,7 @@
 <img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김지훈"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">김지훈</h3>
-<p style="margin: 5px 0;">역할할 | ?</p>
+<p style="margin: 5px 0;">역할 | UI </p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/ddeeqq">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -139,8 +139,6 @@
 | - | - | - | ✅  |
 | - | - | - | ✅  |
 | - | - | - | ✅  |
-
-### 4단계: 테스트 및 배포 ?
 | 작업명 | 담당자 | 기간 | 상태 |
 |--------|--------|------|------|
 | - | - | - | - |
@@ -153,25 +151,26 @@
 
 ### 주요 기능
 
-#### 1. 가성비 분석 기능
+#### 가성비 분석 기능
 - 신차 가격, 중고차 가격, 연식, 주행거리, 인기도를 종합한 점수 계산
 - 100점 만점 기준 가성비 TOP 10 차량 추천
 
-#### 2. 차량 검색 및 필터링
+#### 차량 검색 및 필터링
 - 브랜드, 차종, 연식, 가격, 주행거리 범위별 다중 검색
 - 페이지네이션을 통한 효율적 결과 표시
 
-#### 3. 데이터 분석 대시보드
+#### 데이터 분석 대시보드
 - 브랜드별/연식별/차량종류별 통계 분석
 - 인터랙티브 차트 및 시각화
 
-#### 4. 통합 FAQ 시스템
+#### 통합 FAQ 시스템
 - 현대/기아 218개 FAQ 통합 검색
 - 카테고리별 분류 및 키워드 하이라이팅
 
 ### 기술적 요구사항
-- 데이터 처리량: 6,485개 중고차 매물 처리
-- 응답 시간: 검색 결과 2초 이내
+- 데이터 처리량: 약 7,000개 중고차 매물 데이터베이스 구축
+- 실시간 크롤링: Selenium을 사용한 동적 웹페이지 데이터 수집
+  
 
 ---
 
@@ -191,117 +190,10 @@
 
 - **AllCarData**: 전체 차량 등록 통계 데이터
 
-- **UsedCarData**: 중고차 거래량 통계 데이터
-
-### 주요 테이블 구조
-
-#### CarName 테이블
-```sql
-CREATE TABLE CarName (
-    car_name VARCHAR(50) PRIMARY KEY,
-    car_brand VARCHAR(50) NOT NULL,
-    car_type ENUM('경차', '승용차', 'SUV', '승합차', '트럭'),
-    newcar_price INT NOT NULL
-);
-```
-**데이터 규모**: 67개 차종  
-
-#### CarInfo 테이블  
-```sql
-CREATE TABLE CarInfo (
-    car_ID INT AUTO_INCREMENT PRIMARY KEY,
-    car_name VARCHAR(50),
-    full_name VARCHAR(100) NOT NULL,
-    mileage INT,
-    model_year INT,
-    price INT NOT NULL,
-    FOREIGN KEY (car_name) REFERENCES CarName(car_name)
-);
-```
-**데이터 규모**: 6,485개 중고차 매물
-
-#### car_faq 테이블
-```sql
-CREATE TABLE car_faq (
-    faq_id INT AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(50) NOT NULL,
-    question TEXT NOT NULL,
-    answer TEXT NOT NULL,
-    site VARCHAR(100)
-);
-```
-**데이터 규모**: 218개 FAQ (현대 132개 + 기아 86개)
-
-
----
-
-## 7. 수행결과 (테스트/시연 페이지)
-
-### 메인 페이지 - 가성비 분석
-<div align="center">
-  <img src="images/page1_1.JPG" alt="메인 페이지 - 시장 트렌드 분석" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
-  <br>
-  <i> 자동차 등록 현황 대비 중고차 거래량 분석</i>
-</div>
-<div align="center">
-  <img src="images/page1_2.JPG" alt="메인 페이지 - 가성비 TOP 10" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
-  <br>
-  <i> 알고리즘 기반 가성비 상위 10개 차량</i>
-</div>
-
-**주요 기능**:
-- 시장 트렌드 분석 그래프
-- 가성비 TOP 10 차량 추천 리스트
-- 연도별 중고차 거래 비율 시각화
-
-### 차량 조회 및 분석 페이지
-<div align="center">
-  <img src="images/page2_1.JPG" alt="차량 검색 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
-  <br>
-  <i> 다중 필터 기반 차량 검색 시스템</i>
-</div>
-<div align="center">
-  <img src="images/page2_2.JPG" alt="전체 검색 결과" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
-  <br>
-  <i> 매물 검색 결과 (페이지네이션 지원)</i>
-</div>
-<div align="center">
-  <img src="images/page2_3.png" alt="데이터 분석 대시보드" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
-  <br>
-  <i> 연식별 평균 주행거리 분석 차트</i>
-</div>
-
-**주요 기능**:
-- 다중 필터 검색 (브랜드, 차종, 연식, 가격, 주행거리)
-- 브랜드별/연식별/차량종류별 통계 분석
-- 페이지네이션을 통한 효율적 결과 표시
-
-### FAQ 페이지
-<div align="center">
-  <img src="images/page3.JPG" alt="FAQ 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
-  <br>
-  <i> 현대/기아 통합 FAQ 검색 시스템</i>
-</div>
-
-**주요 기능**:
-- 카테고리별 FAQ 분류
-- 키워드 검색 및 하이라이팅
-- 현대/기아 통합 정보 제공
-
----
-
-## 8. 한 줄 회고
-
-### 박준영 (팀장)
+- **UsedCarData**: 중고차 거래량 링)
 > 
 
-### 정종현 (데이터 분석)
-> 
-
-### 김진 (프론트엔드)
-> 
-
-### 김지훈 (크롤링)
+### 김지훈 (UI)
 > 
 
 ---
