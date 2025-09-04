@@ -239,12 +239,12 @@ CREATE TABLE car_faq (
 
 ### 메인 페이지 - 가성비 분석
 <div align="center">
-  <img src="images/1_1.jpg" alt="메인 페이지 - 시장 트렌드 분석" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <img src="images/page1_1.jpg" alt="메인 페이지 - 시장 트렌드 분석" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
   <i> 자동차 등록 현황 대비 중고차 거래량 분석</i>
 </div>
 <div align="center">
-  <img src="images/1_2.jpg" alt="메인 페이지 - 가성비 TOP 10" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <img src="images/page1_2.jpg" alt="메인 페이지 - 가성비 TOP 10" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
   <i> 알고리즘 기반 가성비 상위 10개 차량</i>
 </div>
@@ -256,17 +256,17 @@ CREATE TABLE car_faq (
 
 ### 차량 조회 및 분석 페이지
 <div align="center">
-  <img src="images/2_1.jpg" alt="차량 검색 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <img src="images/page2_1.jpg" alt="차량 검색 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
   <i> 다중 필터 기반 차량 검색 시스템</i>
 </div>
 <div align="center">
-  <img src="images/2_2.jpg" alt="전체 검색 결과" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <img src="images/page2_2.jpg" alt="전체 검색 결과" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
   <i> 매물 검색 결과 (페이지네이션 지원)</i>
 </div>
 <div align="center">
-  <img src="images/2_3.png" alt="데이터 분석 대시보드" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <img src="images/page2_3.png" alt="데이터 분석 대시보드" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
   <i> 연식별 평균 주행거리 분석 차트</i>
 </div>
@@ -278,7 +278,7 @@ CREATE TABLE car_faq (
 
 ### FAQ 페이지
 <div align="center">
-  <img src="images/3.jpg" alt="FAQ 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <img src="images/page3.jpg" alt="FAQ 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
   <i> 현대/기아 통합 FAQ 검색 시스템</i>
 </div>
