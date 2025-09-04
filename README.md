@@ -1,7 +1,7 @@
 #  중고 자동차 정보 조회 시스템
 
-> **데이터 기반 중고차 구매 의사결정 지원 플랫폼**  
-> Streamlit 기반 웹 애플리케이션으로 중고차 시장 분석과 실시간 정보 조회 서비스
+ **데이터 기반 중고차 구매 의사결정 지원 플랫폼**  
+ Streamlit 기반 웹 애플리케이션으로 중고차 시장 분석과 실시간 정보 조회 서비스
 
 <br>
 
@@ -231,71 +231,6 @@ CREATE TABLE car_faq (
 
 ---
 
-##  설치 및 실행 가이드
-
-### 사전 요구사항
-- Python 3.8+
-- MySQL 8.0+
-- Chrome Browser (크롤링용)
-
-### 설치 단계
-
-1. **저장소 클론**
-```bash
-git clone https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN19-1st-3Team.git
-cd SKN19-1st-3Team
-```
-
-2. **가상환경 생성 및 활성화**
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-```
-
-3. **의존성 패키지 설치**
-```bash
-pip install streamlit pandas mysql-connector-python selenium python-dotenv matplotlib
-```
-
-4. **환경변수 설정**
-```bash
-# .env 파일 생성 후 다음 내용 입력
-DATABASE_USER = "your_username"
-DATABASE_PASSWORD = "your_password" 
-HOST = "localhost"
-```
-
-5. **데이터베이스 생성**
-```bash
-mysql -u root -p < "DB making.sql"
-```
-
-6. **데이터 수집 및 전처리**
-```bash
-# 1. 중고차 데이터 크롤링
-python Crawling_data_KCar.py
-
-# 2. FAQ 데이터 크롤링  
-python Crawling_data_Hyundai_FAQ.py
-python Crawling_data_Kia_FAQ.py
-
-# 3. 데이터 전처리
-python Data_Preprocessing.py
-
-# 4. 데이터베이스 적재
-python Data_input.py
-```
-
-7. **애플리케이션 실행**
-```bash
-streamlit run 메인_페이지.py
-```
-
-<br>
-
----
-
-##  가성비 지수 계산 알고리즘
 
 ### 가성비 점수 산출 공식
 
@@ -340,14 +275,3 @@ def calculate_value_score(df, w_price=0.4, w_year=0.2, w_mileage=0.3, w_count=0.
 - 연식별 가치 하락률 분석
 
 <br>
-
-
----
-
-## 라이선스
-
-이 프로젝트는 **MIT License** 하에 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
-
-<br>
-
----
