@@ -133,9 +133,16 @@ def insert_faq_data_to_db():
     with open(CSV_FILE6, mode='r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
+            category = row['category'].strip()
+            question = row['question'].strip()
+
+            # question이 category로 시작하면 제거
+            if question.startswith(category):
+                question = question[len(category):].strip()
+
             cursor.execute(
                 "INSERT INTO car_faq (category, question, answer, site) VALUES (%s, %s, %s, %s)",
-                (row['category'], row['question'], row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
+                (category, question, row['answer'], row.get('site'))  # site 컬럼은 없을 수 있으니 get 사용
             )
     print("FAQ data inserted successfully.")
     
@@ -145,4 +152,4 @@ def insert_faq_data_to_db():
 
 
 if __name__ == "__main__":
-    insert_faq_data_to_db()
+    insert_data_to_db()

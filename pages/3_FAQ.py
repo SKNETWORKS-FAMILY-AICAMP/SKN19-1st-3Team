@@ -26,17 +26,17 @@ if search_query:
         filtered_df['answer'].str.contains(search_query, case=False, na=False)
     ]
 
-# FAQ 출력
 def highlight_keyword(text, keyword):
     if not keyword:
         return text
-    # 정규식로 대소문자 무시, 모든 검색어 부분에 색상 적용
     pattern = re.compile(re.escape(keyword), re.IGNORECASE)
     return pattern.sub(f'<span style="color:red;font-weight:bold;">\\g<0></span>', text)
 
+# FAQ 출력
 for idx, row in filtered_df.iterrows():
     st.markdown("---")
-    question_html = highlight_keyword(row['question'], search_query)
+    q_text = row['question'].strip()
+    question_html = highlight_keyword(q_text, search_query)
     answer_html = highlight_keyword(row['answer'], search_query)
     st.markdown(f"**Q:** {question_html}", unsafe_allow_html=True)
     st.markdown(f"**A:** {answer_html}", unsafe_allow_html=True)

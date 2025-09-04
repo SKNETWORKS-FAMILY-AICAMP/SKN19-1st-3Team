@@ -15,7 +15,7 @@ def merge_car_data(car_file, name_file, output_file = "merged.csv"):
 
     # data2의 기본 이름이 data1의 차량명에 포함되면 추가
     for _, row in data2.iterrows():
-        nor_name = row["차종"] 
+        nor_name = row["차종"]
         mask = data1["차량명"].str.contains(nor_name, na=False)
         data1.loc[mask, "차종"] = nor_name
 
