@@ -1,11 +1,10 @@
-#  중고 자동차 정보 조회 서비스
+# SK네트웍스 Family AI 캠프 19기 1차 프로젝트
 
- **데이터 기반 중고차 구매 의사결정 지원 서비스**  
- Streamlit 기반 웹 애플리케이션으로 중고차 시장 분석과 실시간 정보 조회 서비스
+## 1. 팀 소개
 
-<br>
+### 팀명: **3Team**
 
-팀 프로필
+### 팀 프로필
 <table>
 <tr>
 <td align="center" width="200" style="vertical-align: top; height: 300px;">
@@ -57,7 +56,7 @@
 <img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%; object-fit: cover;" alt="김지훈"/>
 <br />
 <h3 style="margin: 10px 0 5px 0;">김지훈</h3>
-<p style="margin: 5px 0;">역할 | ?</p>
+<p style="margin: 5px 0;">역할할 | ?</p>
 <div style="margin-top: 10px;">
 <a href="https://github.com/ddeeqq">
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>
@@ -71,88 +70,31 @@
 </tr>
 </table>
 
-<br>
+---
+
+## 2. 프로젝트 개요
+
+### 프로젝트명
+**중고 자동차 구매 고려 고객을 위한 정보 정보 조회 서비스**
+
+### 프로젝트 소개
+데이터 기반 중고차 구매 의사결정 지원을 위한 Streamlit 기반 웹 서비스, 중고차 시장 분석과 실시간 정보 조회 서비스를 제공
+
+### 프로젝트 필요성(배경)
+- 최근 8년간 신차 등록 증가율은 감소하는 반면, 중고차 거래량은 꾸준히 증가
+- 중고차 시장의 중요성이 커지고 있지만, 객관적이고 종합적인 정보 보기 힘듬
+- 차량을 잘 모르는 사람들이 선택하기에는 너무나도 방대한 데이터
+- 브랜드별, 차종별 분석 데이터의 체계적 제공 필요성
+
+### 프로젝트 목표
+- **데이터 기반 가성비 분석**: 알고리즘을 통한 가성비 지수 계산 및 TOP 10 추천
+- **실시간 차량 정보 조회**: 6,485개 중고차 매물 검색 및 필터링 기능
+- **시장 트렌드 분석**: 연도별 중고차 시장 동향 및 브랜드별 통계 제공
+- **통합 FAQ 서비스**: 현대/기아 공식 FAQ 218개 통합 검색 시스템
 
 ---
 
-###  핵심 가치
-- **데이터 기반 분석**: 브랜드별, 연식별, 차종별 심층 분석
-- **실시간 정보**: (K-car)최신 중고차 시장 데이터 제공  
-- **가성비 분석**: 독자적 알고리즘을 통한 가성비 지수 계산
-- **사용자 친화적**: 직관적 UI/UX를 통한 쉬운 정보 접근
-
-<br>
-
----
-
-## 시스템 아키텍처
-
-### ERD
-<div align="center">
-  <img src="images/erd.png" alt="Database ERD" width="800"/>
-  <br>
-  <i> 데이터베이스 테이블 간의 관계도</i>
-</div>
-
-### 테이블 관계
-
-- **CarName** → **Car_Info**: 1:N 관계 (차량 기본정보 - 중고차 매물정보)
-
-- **car_faq**: FAQ 정보 독립 테이블 (현대/기아 통합)
-
-- **AllCarData**: 전체 차량 등록 통계 데이터
-
-- **UsedCarData**: 중고차 거래량 통계 데이터
-
-### 핵심 기능별 데이터 활용
-
-- **가성비 분석**:  
-  CarName + Car_Info 조인으로 신차 vs 중고차 가격 비교
-
-- **시장 트렌드**:  
-  AllCarData + UsedCarData로 거래량 추이 분석
-
-- **FAQ 서비스**:  
-  car_faq 테이블 기반 카테고리별 질답 제공
-<br>
-
----
-
-##  주요 기능
-
-###  1페이지: 메인 대시보드 & 가성비 분석
-- **시장 트렌드 분석**
-  - 자동차 등록 현황 vs 중고차 거래량 비교 시각화
-  - 전년 대비 증감률 및 시장 동향 분석
-  - 중고차 시장 성장세와 중요성 데이터 제시
-
-- **가성비 TOP 10 차량 추천**
-  - 독자적 가성비 지수 (100점 만점) 계산 알고리즘
-  - 신차 가격 대비 중고차 가격, 연식, 주행거리, 인기도 종합 분석
-  - 실시간 업데이트되는 추천 리스트
-
-###  2페이지: 차량 조회 & 분석
-- **고급 검색 필터링**
-  - 브랜드, 차종, 연식, 가격, 주행거리별 다중 필터링
-  - 실시간 검색 결과 및 페이지네이션 지원
-
-- **데이터 분석 대시보드**
-  - 브랜드별/연식별/차량종류별 통계 분석
-  - 평균 가격, 판매 대수, 주행거리 비교
-  - 신차-중고차 가격차이 분석
-  - 인터랙티브 차트를 통한 시각화
-
-###  3페이지: 통합 FAQ 시스템
-- **멀티 브랜드 FAQ 지원**
-  - 현대자동차, 기아자동차 공식 FAQ 통합
-  - 카테고리별 분류 및 실시간 검색 기능
-  - 키워드 하이라이팅으로 향상된 가독성
-
-<br>
-
----
-
-##  기술 스택
+## 3. 기술 스택
 
 ### Frontend
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
@@ -171,45 +113,85 @@
 ### Web Scraping
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
 
-<br>
+---
+
+## 4. WBS (작업별 분해 구조)
+
+### 1단계: 데이터 수집 및 전처리
+| 작업명 | 담당자 | 기간 | 상태 |
+|--------|--------|------|------|
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+
+### 2단계: 데이터베이스 설계 및 구축
+| 작업명 | 담당자 | 기간 | 상태 |
+|--------|--------|------|------|
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+
+### 3단계: 웹 서비스 개발
+| 작업명 | 담당자 | 기간 | 상태 |
+|--------|--------|------|------|
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+| - | - | - | ✅  |
+
+### 4단계: 테스트 및 배포 ?
+| 작업명 | 담당자 | 기간 | 상태 |
+|--------|--------|------|------|
+| - | - | - | - |
+| - | - | - | ✅  |
+| - | - | - | ✅  |
 
 ---
 
-## 📁 프로젝트 구조
+## 5. 요구사항 명세서
 
-```
-SKN19-1st-3Team/
-├── 📄 메인_페이지.py              # 메인 대시보드 (가성비 분석)
-├── 📄 2_조회_및_분석.py           # 차량 검색 및 데이터 분석
-├── 📄 3_FAQ.py                   # 통합 FAQ 시스템
-├── 📊 Data_input.py              # 데이터베이스 연동 모듈
-├── 🔧 Data_Preprocessing.py      # 데이터 전처리 모듈
-├── 🕷️ Crawling_data_KCar.py     # K-Car 중고차 데이터 크롤링
-├── 🕷️ Crawling_data_Hyundai_FAQ.py  # 현대차 FAQ 크롤링
-├── 🕷️ Crawling_data_Kia_FAQ.py      # 기아차 FAQ 크롤링
-├── 🗄️ DB making.sql             # 데이터베이스 스키마
-├── 🖼️ images/                   # 팀원 프로필 이미지
-│   ├── yeon.jpg
-│   ├── jong.png
-│   ├── jin.png
-│   └── hun.jpg
-├── 📊 data/                      # 데이터 파일들
-│   ├── merged_clean.csv          # 정제된 중고차 데이터
-│   ├── car_name.csv             # 차량 기본 정보
-│   ├── usedcar_data.csv         # 중고차 거래량 데이터
-│   ├── AllCarData.csv           # 전체 차량 등록 데이터
-│   ├── hyundai_faq.csv          # 현대차 FAQ
-│   └── kia_faq.csv              # 기아차 FAQ
-├── ⚙️ .env                       # 환경변수 설정
-├── 🚫 .gitignore                # Git 제외 파일
-└── 📖 README.md
-```
+### 주요 기능
 
-<br>
+#### 1. 가성비 분석 기능
+- 신차 가격, 중고차 가격, 연식, 주행거리, 인기도를 종합한 점수 계산
+- 100점 만점 기준 가성비 TOP 10 차량 추천
+
+#### 2. 차량 검색 및 필터링
+- 브랜드, 차종, 연식, 가격, 주행거리 범위별 다중 검색
+- 페이지네이션을 통한 효율적 결과 표시
+
+#### 3. 데이터 분석 대시보드
+- 브랜드별/연식별/차량종류별 통계 분석
+- 인터랙티브 차트 및 시각화
+
+#### 4. 통합 FAQ 시스템
+- 현대/기아 218개 FAQ 통합 검색
+- 카테고리별 분류 및 키워드 하이라이팅
+
+### 기술적 요구사항
+- 데이터 처리량: 6,485개 중고차 매물 처리
+- 응답 시간: 검색 결과 2초 이내
 
 ---
 
-##  데이터베이스 설계
+## 6. ERD
+
+<div align="center">
+  <img src="images/erd.png" alt="Database ERD" width="800"/>
+  <br>
+  <i>데이터베이스 테이블 간의 관계도</i>
+</div>
+
+### 테이블 관계 설명
+
+- **CarName** → **Car_Info**: 1:N 관계 (차량 기본정보 - 중고차 매물정보)
+
+- **car_faq**: FAQ 정보 독립 테이블 (현대/기아 통합)
+
+- **AllCarData**: 전체 차량 등록 통계 데이터
+
+- **UsedCarData**: 중고차 거래량 통계 데이터
 
 ### 주요 테이블 구조
 
@@ -222,8 +204,7 @@ CREATE TABLE CarName (
     newcar_price INT NOT NULL
 );
 ```
-**규모**: 67개 차종  
-**주요 컬럼**: 브랜드, 차종, 차량종류, 신차가격
+**데이터 규모**: 67개 차종  
 
 #### CarInfo 테이블  
 ```sql
@@ -237,8 +218,7 @@ CREATE TABLE CarInfo (
     FOREIGN KEY (car_name) REFERENCES CarName(car_name)
 );
 ```
-**규모**: 6,485개 중고차 매물  
-**주요 컬럼**: 차종, 차량명, 연식, 주행거리, 가격
+**데이터 규모**: 6,485개 중고차 매물
 
 #### car_faq 테이블
 ```sql
@@ -250,51 +230,81 @@ CREATE TABLE car_faq (
     site VARCHAR(100)
 );
 ```
-**규모**: 218개 FAQ (현대 132개 + 기아 86개)  
-**주요 컬럼**: 카테고리, 질문, 답변, 출처사이트
+**데이터 규모**: 218개 FAQ (현대 132개 + 기아 86개)
 
-#### UsedCarData 테이블
-```sql
-CREATE TABLE UsedCarData (
-    yearNum INT PRIMARY KEY,
-    total_transactions INT NOT NULL
-);
-```
-**규모**: 9년간 데이터 (2015-2023)  
-**주요 컬럼**: 연도, 중고차 총거래대수
-
-#### AllCarData 테이블
-```sql
-CREATE TABLE AllCarData (
-    yearNum INT PRIMARY KEY,
-    total_transactions INT NOT NULL
-);
-```
-**규모**: 9년간 데이터 (2015-2023)  
-**주요 컬럼**: 연도, 전체차량 총거래대수
-
-
-<br>
 
 ---
 
+## 7. 수행결과 (테스트/시연 페이지)
 
+### 메인 페이지 - 가성비 분석
+<div align="center">
+  <img src="images/1_1.jpg" alt="메인 페이지 - 시장 트렌드 분석" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <br>
+  <i> 자동차 등록 현황 대비 중고차 거래량 분석</i>
+</div>
+<div align="center">
+  <img src="images/1_2.jpg" alt="메인 페이지 - 가성비 TOP 10" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <br>
+  <i> 알고리즘 기반 가성비 상위 10개 차량</i>
+</div>
 
-##  주요 분석 기능
+**주요 기능**:
+- 시장 트렌드 분석 그래프
+- 가성비 TOP 10 차량 추천 리스트
+- 연도별 중고차 거래 비율 시각화
 
-### 시장 트렌드 분석
-- 신차 등록량 vs 중고차 거래량 추세 비교
-- 전년 대비 증감률 시각화
-- 중고차 시장 점유율 변화
+### 차량 조회 및 분석 페이지
+<div align="center">
+  <img src="images/2_1.jpg" alt="차량 검색 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <br>
+  <i> 다중 필터 기반 차량 검색 시스템</i>
+</div>
+<div align="center">
+  <img src="images/2_2.jpg" alt="전체 검색 결과" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <br>
+  <i> 매물 검색 결과 (페이지네이션 지원)</i>
+</div>
+<div align="center">
+  <img src="images/2_3.png" alt="데이터 분석 대시보드" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <br>
+  <i> 연식별 평균 주행거리 분석 차트</i>
+</div>
 
-### 브랜드별 분석
-- 브랜드별 평균 중고차 가격
-- 신차-중고차 가격차이 분석
-- 브랜드별 중고차 등록 대수
+**주요 기능**:
+- 다중 필터 검색 (브랜드, 차종, 연식, 가격, 주행거리)
+- 브랜드별/연식별/차량종류별 통계 분석
+- 페이지네이션을 통한 효율적 결과 표시
 
-### 차량 종류별 분석  
-- 경차, 승용차, SUV, 승합차, 트럭별 통계
-- 차종별 가격 분포 및 선호도
-- 연식별 가치 하락률 분석
+### FAQ 페이지
+<div align="center">
+  <img src="images/3.jpg" alt="FAQ 페이지" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
+  <br>
+  <i> 현대/기아 통합 FAQ 검색 시스템</i>
+</div>
 
-<br>
+**주요 기능**:
+- 카테고리별 FAQ 분류
+- 키워드 검색 및 하이라이팅
+- 현대/기아 통합 정보 제공
+
+---
+
+## 8. 한 줄 회고
+
+### 박준영 (팀장)
+> 
+
+### 정종현 (데이터 분석)
+> 
+
+### 김진 (프론트엔드)
+> 
+
+### 김지훈 (크롤링)
+> 
+
+---
+
+## 프로젝트 Repository
+**GitHub**: [SKN19-1st-3Team](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN19-1st-3Team)
