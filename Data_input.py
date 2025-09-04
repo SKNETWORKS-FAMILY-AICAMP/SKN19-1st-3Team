@@ -1,4 +1,5 @@
 import csv
+import os
 import pandas as pd
 import mysql.connector
 
@@ -11,9 +12,9 @@ CSV_FILE6 = "hyundai_faq.csv"  # category, question, answer, site(선택)
 
 # MySQL 연결 설정
 db_config = {
-    'user': 'Park',             # MySQL 사용자 이름
-    'password': 'Park',         # MySQL 비밀번호
-    'host': 'localhost',        # MySQL 호스트 (로컬호스트
+    'user': os.getenv("DATABASE_USER"),             # MySQL 사용자 이름
+    'password': os.getenv("DATABASE_PASSWORD"),         # MySQL 비밀번호
+    'host': os.getenv("HOST"),        # MySQL 호스트 (로컬호스트
     'database': 'used_car_db'   # 사용할 데이터베이스 이름
 }
 
