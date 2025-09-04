@@ -6,7 +6,7 @@
 <table>
 <tr>
 <td align="center" width="200">
-<img src="https://via.placeholder.com/150" width="150" height="150" style="border-radius: 50%;" alt="박준영"/>
+<img src="images/yeon.jpg" width="150" height="150" style="border-radius: 50%;" alt="박준영"/>
 <br />
 <h3>박준영</h3>
 <p>역할: </p>
@@ -18,7 +18,7 @@
 </a>
 </td>
 <td align="center" width="200">
-<img src="https://via.placeholder.com/150" width="150" height="150" style="border-radius: 50%;" alt="정종현"/>
+<img src="images/jong.jpg" width="150" height="150" style="border-radius: 50%;" alt="정종현"/>
 <br />
 <h3>정종현</h3>
 <p>역할: </p>
@@ -30,7 +30,7 @@
 </a>
 </td>
 <td align="center" width="200">
-<img src="https://via.placeholder.com/150" width="150" height="150" style="border-radius: 50%;" alt="김진"/>
+<img src="images/jin.jpg" width="150" height="150" style="border-radius: 50%;" alt="김진"/>
 <br />
 <h3>김진</h3>
 <p>역할: </p>
@@ -42,7 +42,7 @@
 </a>
 </td>
 <td align="center" width="200">
-<img src="https://i.ibb.co/M5m6M0Y/streamlit.png" width="150" height="150" style="border-radius: 50%;" alt="김지훈"/>
+<img src="images/hun.jpg" width="150" height="150" style="border-radius: 50%;" alt="김지훈"/>
 <br />
 <h3>김지훈</h3>
 <p>역할: </p>
