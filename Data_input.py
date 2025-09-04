@@ -2,6 +2,7 @@ import csv
 import os
 import pandas as pd
 import mysql.connector
+from dotenv import load_dotenv
 
 CSV_FILE = "merged_clean.csv"  # 차종, 차량명, 연식, 주행거리, 가격
 CSV_FILE2 = "car_name.csv"  # 브랜드, 차종, 차량종류, 신차가격
@@ -10,6 +11,7 @@ CSV_FILE4 = "AllCarData.csv" # 연도, 총거래량
 CSV_FILE5 = "kia_faq.csv"  # category, question, answer, site(선택)
 CSV_FILE6 = "hyundai_faq.csv"  # category, question, answer, site(선택)
 
+load_dotenv()  # .env 파일에서 환경 변수 로드
 # MySQL 연결 설정
 db_config = {
     'user': os.getenv("DATABASE_USER"),             # MySQL 사용자 이름

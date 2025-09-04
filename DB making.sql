@@ -7,7 +7,7 @@ USE used_car_db;
 CREATE TABLE IF NOT EXISTS CarName (
     car_name VARCHAR(50) PRIMARY KEY,
     car_brand VARCHAR(50) NOT NULL,
-    car_type ENUM('경차', '승용차', 'SUV', '승합차', '트럭')
+    car_type ENUM('경차', '승용차', 'SUV', '승합차', '트럭'),
     newcar_price INT NOT NULL
 )
 

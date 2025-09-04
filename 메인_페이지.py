@@ -53,7 +53,7 @@ plt.grid(True)
 # 6️⃣ Streamlit에 표시
 st.pyplot(fig)
 
-st.markdown("최근 중고차 시장의 활성화와 더불어 많은 소비자들이 중고차를 찾고 있습니다.\n ")
+st.markdown("최근 중고차 시장의 활성화와 더불어 많은 소비자들이 중고차를 찾고 있습니다.\n 해당 페이지를 통해 원하는 매물을 쉽게 찾아보세요.")
 
 st.markdown("---")
 
