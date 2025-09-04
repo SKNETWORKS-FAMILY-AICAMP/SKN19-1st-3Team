@@ -264,7 +264,7 @@ CREATE TABLE AllCarData (
 <div align="center">
   <img src="images/page2_2.JPG" alt="전체 검색 결과" style="max-width: 100%; height: auto; margin-bottom: 20px;"/>
   <br>
-  <i>다중 필터 기반 차량 검색 시스템2 /i>
+  <i>다중 필터 기반 차량 검색 시스템2 </i>
 </div>
 
 <div align="center">
@@ -318,7 +318,7 @@ CREATE TABLE AllCarData (
 > 
 
 ### 김지훈 (UI/UX)
-> 
+> 필요할 데이터가 어떤 의미인지 모르고 화면을 구성한다는 것이 너무 어려웠습니다. 하지만, 관련 화면의 벤치마킹으로 최대한 직관적인 화면이 되도록 만들어 보았습니다. 필요한 Data를 만드는 것 뿐만 아니라, 그 Data에 어떤 의미가 있는지 부여하는 화면 작업은 새로운 경험이 되었습니다.
 
 ---
 
