@@ -7,21 +7,16 @@ import re
 # DB에서 DataFrame 형태로 로드
 df = Dinput.load_data_to_db("SELECT * FROM car_faq")
 
-# st.title("Car FAQ")
-my_image = Image.open('./data/image_03.jpg')
-st.image(my_image)
+st.title("Car FAQ")
 st.markdown("---")
 
 # 카테고리 선택
-# categories = df['category'].unique()
-# selected_category = st.selectbox("카테고리를 선택하세요:", categories)
 with st.container():
     st.markdown('<div class="input-box"><span class="input-label">📂 카테고리를 선택하세요</span>', unsafe_allow_html=True)
     selected_category = st.selectbox("", df['category'].unique(), label_visibility="collapsed")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # 검색어 입력
-# search_query = st.text_input("검색어를 입력하세요:")
 with st.container():
     st.markdown('<div class="input-box"><span class="input-label">🔍 검색어를 입력하세요</span>', unsafe_allow_html=True)
     search_query = st.text_input("", "", placeholder="예: 견적, 기준...", label_visibility="collapsed")
@@ -54,15 +49,6 @@ def highlight_keyword(text, keyword):
     pattern = re.compile(re.escape(keyword), re.IGNORECASE)
     return pattern.sub(f'<span style="color:#ff4757;font-weight:600;">\\g<0></span>', text)
 
-# for idx, row in filtered_df.iterrows():
-#     st.markdown("---")
-#     q_text = row['question'].strip()
-#     question_html = highlight_keyword(q_text, search_query)
-#     answer_html = highlight_keyword(row['answer'], search_query)
-#     st.markdown(f"**Q:** {question_html}", unsafe_allow_html=True)
-#     st.markdown(f"**A:** {answer_html}", unsafe_allow_html=True)
-#     if pd.notna(row.get('site')):
-#         st.markdown(f"🔗 출처: {row['site']}")
 
 faq_card_style = """
 <style>
